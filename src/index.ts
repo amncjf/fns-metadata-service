@@ -78,7 +78,7 @@ app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.get(
   '/docs',
   docUI({
-    title: 'ENS Metadata Service',
+    title: 'FNS Metadata Service',
     specUrl: '/assets/doc_output.json',
   })
 );

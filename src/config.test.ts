@@ -15,10 +15,10 @@ test.after('cleanup', t => {
 });
 
 test('should get SERVER_URL as given custom host', async (t: ExecutionContext<TestContext>) => {
-    const ENS = 'app.ens.domains';
+    const FNS = 'metadata.fildomains.com';
     process.env.NETWORK = "local"
-    process.env.HOST = ENS
+    process.env.HOST = FNS
     process.env.ENV = "main"
     const { SERVER_URL } = requireUncached('../src/config');
-    t.is(SERVER_URL, `https://${ENS}`);
+    t.is(SERVER_URL, `https://${FNS}`);
 });

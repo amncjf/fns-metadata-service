@@ -68,7 +68,7 @@ export class MockEntry {
     if (unknown) {
       const { url, ...unknownMetadata } = new Metadata({
         name: 'unknown.name',
-        description: 'Unknown ENS name',
+        description: 'Unknown FNS name',
         created_date: 1580346653000,
         tokenId: '',
         version: Version.v1,

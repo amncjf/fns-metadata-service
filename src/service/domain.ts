@@ -21,8 +21,8 @@ import {
 }                         from '../utils/fuse';
 import { getNamehash }    from '../utils/namehash';
 
-const eth =
-  '0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae';
+const fil =
+  '0x78f6b1389af563cc5c91f234ea46b055e49658d8b999eeb9e0baef7dbbc93fdb';
 const GRACE_PERIOD_MS = 7776000000; // 90 days as milliseconds
 
 export async function getDomain(
@@ -48,6 +48,7 @@ export async function getDomain(
   const queryDocument: string =
     version !== Version.v2 ? GET_DOMAINS_BY_LABELHASH : GET_DOMAINS;
   const result = await request(SUBGRAPH_URL, queryDocument, { tokenId: hexId });
+
   const domain = version !== Version.v2 ? result.domains[0] : result.domain;
   if (!(domain && Object.keys(domain).length))
     throw new SubgraphRecordNotFound(`No record for ${hexId}`);
@@ -98,16 +99,16 @@ export async function getDomain(
       metadata.generateImage();
     } else {
       metadata.setBackground(
-        `https://metadata.ens.domains/${networkName}/avatar/${name}`
+        `https://metadata.fildomains.com/${networkName}/avatar/${name}`
       );
       metadata.setImage(
-        `https://metadata.ens.domains/${networkName}/${contractAddress}/${hexId}/image`
+        `https://metadata.fildomains.com/${networkName}/${contractAddress}/${hexId}/image`
       );
     }
   }
 
   async function requestAttributes() {
-    if (parent.id === eth) {
+    if (parent.id === fil) {
       const { registrations } = await request(SUBGRAPH_URL, GET_REGISTRATIONS, {
         labelhash,
       });

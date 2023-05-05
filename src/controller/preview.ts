@@ -5,8 +5,8 @@ import { Metadata } from '../service/metadata';
 
 /* istanbul ignore next */
 export async function preview(req: Request, res: Response) {
-  // #swagger.description = 'ENS NFT preview'
-  // #swagger.parameters['name'] = { type: 'string', description: 'ENS name.' }
+  // #swagger.description = 'FNS NFT preview'
+  // #swagger.parameters['name'] = { type: 'string', description: 'FNS name.' }
   res.setTimeout(RESPONSE_TIMEOUT, () => {
     res.status(504).json({ message: 'Timeout' });
   });
@@ -14,8 +14,8 @@ export async function preview(req: Request, res: Response) {
   const { name } = req.params;
 
   try {
-    if (!name || name.length < 7 || !name.endsWith('.eth')) {
-      throw Error(`${name} is not an ENS name.`);
+    if (!name || name.length < 7 || !name.endsWith('.fil')) {
+      throw Error(`${name} is not an FNS name.`);
     }
     const metadata = new Metadata({
       name,

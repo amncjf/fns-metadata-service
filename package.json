@@ -36,11 +36,11 @@
   },
   "scripts": {
     "build": "tsc --project ./ && cpx 'src/assets/**' 'dist/assets'",
-    "dev": "ENV=local ts-node-dev --inspect -- src/index.ts",
+    "dev": "cross-env ENV=local ts-node-dev --inspect -- src/index.ts",
     "start": "node dist/index.js",
-    "deploy": "ENV=prod yarn build && gcloud app deploy --project=ens-metadata-service",
-    "deploy:test": "ENV=prod yarn build && gcloud app deploy --no-promote --project=ens-metadata-service",
-    "test": "ENV=local ava -v --serial --timeout=1m",
+    "deploy": "cross-env ENV=prod yarn build && gcloud app deploy --project=ens-metadata-service",
+    "deploy:test": "cross-env ENV=prod yarn build && gcloud app deploy --no-promote --project=ens-metadata-service",
+    "test": "cross-env ENV=local ava -v --serial --timeout=1m",
     "test:cov": "nyc --reporter=json --reporter=text ava --serial",
     "docgen": "node docgen.js"
   },
@@ -55,6 +55,7 @@
     "@types/test-listen": "^1.1.0",
     "ava": "^5.0.1",
     "cpx": "^1.5.0",
+    "cross-env": "^7.0.3",
     "fetch-mock": "^9.11.0",
     "got": "^11.8.2",
     "nock": "^13.3.0",

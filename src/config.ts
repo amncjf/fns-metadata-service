@@ -8,7 +8,7 @@ const ENV = process.env.ENV || 'local'; // local/prod
 const FONT_FOLDER = path.join((ENV === 'local' ? 'src' : 'dist'), 'assets');
 const CANVAS_FONT_PATH = path.join(FONT_FOLDER, 'Satoshi-Bold.ttf');
 const CANVAS_EMOJI_FONT_PATH = path.join(FONT_FOLDER, 'NotoColorEmoji.ttf');
-const INAMEWRAPPER = process.env.INAMEWRAPPER || '0xd82c42d8';
+const INAMEWRAPPER = process.env.INAMEWRAPPER || '0x4d6b2f7a';
 
 const IPFS_GATEWAY = process.env.IPFS_GATEWAY || 'https://ipfs.io';
 const INFURA_API_KEY = process.env.INFURA_API_KEY || '';
@@ -19,9 +19,9 @@ const NODE_PROVIDER_URL = process.env.NODE_PROVIDER_URL || 'http://localhost:854
 const NODE_PROVIDER_URL_CF = process.env.NODE_PROVIDER_URL_CF || '';
 const NODE_PROVIDER_URL_GOERLI = process.env.NODE_PROVIDER_URL_GOERLI || '';
 
-const ADDRESS_ETH_REGISTRAR = process.env.ADDRESS_ETH_REGISTRAR || '0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85';
-const ADDRESS_ETH_REGISTRY = process.env.ADDRESS_ETH_REGISTRY || '0x00000000000c2e074ec69a0dfb2997ba6c7d2e1e'
-const ADDRESS_NAME_WRAPPER = process.env.ADDRESS_NAME_WRAPPER || '0x114D4603199df73e7D157787f8778E21fCd13066';
+const ADDRESS_ETH_REGISTRAR = process.env.ADDRESS_ETH_REGISTRAR || '0x495afaC4f4272f7c747D6910e74430584Ef1f50A';
+const ADDRESS_ETH_REGISTRY = process.env.ADDRESS_ETH_REGISTRY || '0x0000000000Ec577Ad90e99CA7817e976e953C3bd'
+const ADDRESS_NAME_WRAPPER = process.env.ADDRESS_NAME_WRAPPER || '0x46b7a579eDa54bdF1D2739F439C21EE889633020';
 
 const SERVER_URL =
   ENV === 'local' ? `http://localhost:${PORT}` : `https://${HOST}`;

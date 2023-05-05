@@ -13,8 +13,8 @@
 ### Request
 - __network:__ Name of the chain to query for. (mainnet | rinkeby | ropsten | goerli ...)
 - __contactAddress:__ accepts contractAddress of the NFT which represented by the tokenId
-- __NFT v1 - tokenId:__ accepts ENS name or labelhash of ENS name in both hex and int format
-- __NFT v2 - tokenId:__ accepts ENS name or namehash of ENS name in both hex and int format
+- __NFT v1 - tokenId:__ accepts FNS name or labelhash of FNS name in both hex and int format
+- __NFT v2 - tokenId:__ accepts FNS name or namehash of FNS name in both hex and int format
 
 ```
 /{network}/{contractAddress}/{tokenId}
@@ -30,7 +30,7 @@ https://metadata.ens.domains/mainnet/0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85/
 {
   "is_normalized": true,
   "name": "nick.eth",
-  "description": "nick.eth, an ENS name.",
+  "description": "nick.eth, an FNS name.",
   "attributes": [
     {
       "trait_type": "Created Date",
@@ -65,7 +65,7 @@ https://metadata.ens.domains/mainnet/0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85/
   ],
   "name_length": 4,
   "segment_length": 4,
-  "url": "https://app.ens.domains/name/nick.eth",
+  "url": "https://metadata.fildomains.com:8080/name/nick.eth",
   "version": 0,
   "background_image": "https://metadata.ens.domains/mainnet/avatar/nick.eth",
   "image": "https://metadata.ens.domains/mainnet/0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85/0x5d5727cb0fb76e4944eafb88ec9a3cf0b3c9025a4b2f947729137c5d7f84f68f/image",

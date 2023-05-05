@@ -11,7 +11,7 @@ const CANNOT_APPROVE = 64;
 
 // parent named fuses
 const PARENT_CANNOT_CONTROL = 0x10000;
-const IS_DOT_ETH = 0x20000;
+const IS_DOT_FIL = 0x20000;
 const CAN_EXTEND_EXPIRY = 0x40000;
 
 // fuse ranges
@@ -39,7 +39,7 @@ export const parentFuseEnum = {
 
 export const fullParentFuseEnum = {
   ...parentFuseEnum,
-  IS_DOT_ETH,
+  IS_DOT_FIL,
 } as const;
 
 export const userSettableFuseEnum = {

@@ -4,7 +4,7 @@ const ETH_NAMEHASH =
   '0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae';
 
 export const GET_DOMAINS = gql`
-  query getDomains($tokenId: String) {
+  query getDomains($tokenId: String!) {
     domain(id: $tokenId) {
       id
       labelhash
@@ -22,7 +22,7 @@ export const GET_DOMAINS = gql`
 `;
 
 export const GET_DOMAINS_BY_LABELHASH = gql`
-  query getDomains($tokenId: String) {
+  query getDomains($tokenId: String!) {
     domains(
       where: {
         parent: "${ETH_NAMEHASH}",
@@ -45,7 +45,7 @@ export const GET_DOMAINS_BY_LABELHASH = gql`
 `;
 
 export const GET_REGISTRATIONS = gql`
-  query getRegistration($labelhash: String) {
+  query getRegistration($labelhash: String!) {
     registrations(
       orderBy: registrationDate
       orderDirection: desc
@@ -59,7 +59,7 @@ export const GET_REGISTRATIONS = gql`
 `;
 
 export const GET_WRAPPED_DOMAIN = gql`
-query getWrappedDomain($tokenId: String) {
+query getWrappedDomain($tokenId: String!) {
   wrappedDomain(id: $tokenId) {
     id
     owner {

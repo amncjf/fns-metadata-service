@@ -21,10 +21,10 @@ import getNetwork, { NetworkName } from '../service/network';
 import { constructEthNameHash }    from '../utils/namehash';
 
 export async function ensMetadata(req: Request, res: Response) {
-  // #swagger.description = 'ENS NFT metadata'
+  // #swagger.description = 'FNS NFT metadata'
   // #swagger.parameters['networkName'] = { schema: { $ref: '#/definitions/networkName' } }
   // #swagger.parameters['{}'] = { name: 'contractAddress', description: 'Contract address which stores the NFT indicated by the tokenId', schema: { $ref: '#/definitions/contractAddress' } }
-  // #swagger.parameters['tokenId'] = { type: 'string', description: 'Labelhash(v1) /Namehash(v2) of your ENS name.\n\nMore: https://docs.ens.domains/contract-api-reference/name-processing#hashing-names', schema: { $ref: '#/definitions/tokenId' } }
+  // #swagger.parameters['tokenId'] = { type: 'string', description: 'Labelhash(v1) /Namehash(v2) of your FNS name.\n\nMore: https://docs.ens.domains/contract-api-reference/name-processing#hashing-names', schema: { $ref: '#/definitions/tokenId' } }
   res.setTimeout(RESPONSE_TIMEOUT, () => {
     res.status(504).json({ message: 'Timeout' });
   });
@@ -79,7 +79,7 @@ export async function ensMetadata(req: Request, res: Response) {
     }
 
     try {
-      // Here is the case; if subgraph did not index fresh ENS name but registry has the record,
+      // Here is the case; if subgraph did not index fresh FNS name but registry has the record,
       // instead of 'not found' send positive unknown metadata information
       const registry = new Contract(
         ADDRESS_ETH_REGISTRY,
@@ -91,13 +91,13 @@ export async function ensMetadata(req: Request, res: Response) {
       }
       const _namehash = constructEthNameHash(tokenId, version as Version);
       const isRecordExist = await registry.recordExists(_namehash);
-      assert(isRecordExist, 'ENS name does not exist');
+      assert(isRecordExist, 'FNS name does not exist');
 
       // When entry is not available on subgraph yet,
       // return unknown name metadata with 200 status code
       const { url, ...unknownMetadata } = new Metadata({
         name: 'unknown.name',
-        description: 'Unknown ENS name',
+        description: 'Unknown FNS name',
         created_date: 1580346653000,
         tokenId: '',
         version: Version.v1,

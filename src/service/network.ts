@@ -20,6 +20,9 @@ export const NETWORK = {
   ROPSTEN: 'ropsten',
   GOERLI : 'goerli',
   MAINNET: 'mainnet',
+  FILECOIN: 'filecoin',
+  HYPERSPACE: 'hyperspace',
+  CALIBRATION: 'calibration',
 } as const;
 
 export type NetworkName = typeof NETWORK[keyof typeof NETWORK];
@@ -29,6 +32,14 @@ function getWeb3URL(
   api: string,
   network: NetworkName
 ): string {
+  if (network === 'filecoin') {
+    return 'https://api.node.glif.io'
+  } else if (network === 'hyperspace') {
+    return 'https://api.hyperspace.node.glif.io/rpc/v1'
+  } else if (network === 'calibration') {
+    return 'https://api.calibration.node.glif.io/rpc/v1'
+  }
+
   switch (providerName.toUpperCase()) {
     case NODE_PROVIDERS.INFURA:
       return `${api.replace('https://', `https://${network}.`)}`;
@@ -57,9 +68,17 @@ export default function getNetwork(network: NetworkName): {
     case NETWORK.LOCAL:
       SUBGRAPH_URL = 'http://127.0.0.1:8000/subgraphs/name/graphprotocol/ens';
       break;
-    case NETWORK.RINKEBY:
+    case NETWORK.FILECOIN:
       SUBGRAPH_URL =
-        'https://api.thegraph.com/subgraphs/name/makoto/ensrinkeby';
+        'https://api.fildomains.com:5678/filecoin';
+      break;
+    case NETWORK.HYPERSPACE:
+      SUBGRAPH_URL =
+          'https://api.fildomains.com:5678/hyperspace';
+      break;
+    case NETWORK.CALIBRATION:
+      SUBGRAPH_URL =
+          'https://api.fildomains.com:5678/calibration';
       break;
     case NETWORK.ROPSTEN:
       SUBGRAPH_URL =

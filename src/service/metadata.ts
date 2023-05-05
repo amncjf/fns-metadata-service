@@ -64,7 +64,7 @@ export class Metadata {
     this.name = this.formatName(name, tokenId);
     this.description = this.formatDescription(name, description);
     this.attributes = this.initializeAttributes(created_date, label);
-    this.url = this.is_normalized ? `https://app.ens.domains/name/${name}` : null;
+    this.url = this.is_normalized ? `https://metadata.fildomains.com/name/${name}` : null;
     this.last_request_date = last_request_date;
     this.version = version;
   }
@@ -78,12 +78,12 @@ export class Metadata {
       ? name
       : tokenId.replace(
           new RegExp('^(.{0,6}).*(.{4})$', 'im'),
-          '[$1...$2].eth'
+          '[$1...$2].fil'
         );
   }
 
   formatDescription(name: string, description?: string) {
-    const baseDescription = description || `${this.name}, an ENS name.`;
+    const baseDescription = description || `${this.name}, an FNS name.`;
     const normalizedNote = !this.is_normalized ? ` (${name} is not in normalized form)` : '';
     const asciiWarning = this.generateAsciiWarning(this.getLabel(name));
     return `${baseDescription}${normalizedNote}${asciiWarning}`;
@@ -236,7 +236,7 @@ export class Metadata {
       name.substring(0, Metadata.MAX_CHAR - 7) +
       '...' +
       name.substring(_nameLength - 7, _nameLength - 4) +
-      '.eth'
+      '.fil'
     );
   }
 

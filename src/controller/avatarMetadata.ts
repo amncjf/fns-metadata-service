@@ -13,9 +13,9 @@ import { getAvatarMeta }           from '../service/avatar';
 import getNetwork, { NetworkName } from '../service/network';
 
 export async function avatarMetadata(req: Request, res: Response) {
-  // #swagger.description = 'ENS avatar metadata'
+  // #swagger.description = 'FNS avatar metadata'
   // #swagger.parameters['networkName'] = { schema: { $ref: '#/definitions/networkName' } }
-  // #swagger.parameters['name'] = { description: 'ENS name', schema: { $ref: '#/definitions/ensName' } }
+  // #swagger.parameters['name'] = { description: 'FNS name', schema: { $ref: '#/definitions/ensName' } }
   res.setTimeout(RESPONSE_TIMEOUT, () => {
     res.status(504).json({ message: 'Timeout' });
   });
