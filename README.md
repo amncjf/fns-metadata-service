@@ -12,100 +12,110 @@
 
 Request (example)
 
-https://metadata.fildomains.com/filecoin/0x46b7a579eDa54bdF1D2739F439C21EE889633020/12021683011351676866787576003687593997598021892557666729367778369262666928810/
+https://metadata.fildomains.com/filecoin/0x46b7a579eDa54bdF1D2739F439C21EE889633020/0x6e0d3b4e9c9fce6a263ec0e71ebe2bb47154eb3257b6a9445bb0405aab0e46fa/
 
 ### Response (example)
 
 ```json
 {
   "is_normalized": true,
-  "name": "fildomains.fil",
-  "description": "fildomains.fil, an FNS name.",
-  "attributes": [{
-    "trait_type": "Created Date",
-    "display_type": "date",
-    "value": 1682180520000
-  }, {
-    "trait_type": "Length",
-    "display_type": "number",
-    "value": 10
-  }, {
-    "trait_type": "Segment Length",
-    "display_type": "number",
-    "value": 10
-  }, {
-    "trait_type": "Character Set",
-    "display_type": "string",
-    "value": "letter"
-  }, {
-    "trait_type": "Registration Date",
-    "display_type": "date",
-    "value": 1682180520000
-  }, {
-    "trait_type": "Expiration Date",
-    "display_type": "date",
-    "value": 1713716520000
-  }, {
-    "trait_type": "Namewrapper Fuse States",
-    "display_type": "object",
-    "value": {
-      "parent": {
-        "PARENT_CANNOT_CONTROL": true,
-        "CAN_EXTEND_EXPIRY": false,
-        "IS_DOT_FIL": false,
-        "unnamed": {
-          "524288": false,
-          "1048576": false,
-          "2097152": false,
-          "4194304": false,
-          "8388608": false,
-          "16777216": false,
-          "33554432": false,
-          "67108864": false,
-          "134217728": false,
-          "268435456": false,
-          "536870912": false,
-          "1073741824": false,
-          "2147483648": false
-        }
-      },
-      "child": {
-        "CANNOT_UNWRAP": false,
-        "CANNOT_BURN_FUSES": false,
-        "CANNOT_TRANSFER": false,
-        "CANNOT_SET_RESOLVER": false,
-        "CANNOT_SET_TTL": false,
-        "CANNOT_CREATE_SUBDOMAIN": false,
-        "CANNOT_APPROVE": false,
-        "CAN_DO_EVERYTHING": true,
-        "unnamed": {
-          "128": false,
-          "256": false,
-          "512": false,
-          "1024": false,
-          "2048": false,
-          "4096": false,
-          "8192": false,
-          "16384": false,
-          "32768": false
+  "name": "avatar.fil",
+  "description": "avatar.fil, an FNS name.",
+  "attributes": [
+    {
+      "trait_type": "Created Date",
+      "display_type": "date",
+      "value": 1684987050000
+    },
+    {
+      "trait_type": "Length",
+      "display_type": "number",
+      "value": 6
+    },
+    {
+      "trait_type": "Segment Length",
+      "display_type": "number",
+      "value": 6
+    },
+    {
+      "trait_type": "Character Set",
+      "display_type": "string",
+      "value": "letter"
+    },
+    {
+      "trait_type": "Registration Date",
+      "display_type": "date",
+      "value": 1684987050000
+    },
+    {
+      "trait_type": "Expiration Date",
+      "display_type": "date",
+      "value": 1842667050000
+    },
+    {
+      "trait_type": "Namewrapper Fuse States",
+      "display_type": "object",
+      "value": {
+        "parent": {
+          "PARENT_CANNOT_CONTROL": true,
+          "CAN_EXTEND_EXPIRY": false,
+          "IS_DOT_FIL": false,
+          "unnamed": {
+            "524288": false,
+            "1048576": false,
+            "2097152": false,
+            "4194304": false,
+            "8388608": false,
+            "16777216": false,
+            "33554432": false,
+            "67108864": false,
+            "134217728": false,
+            "268435456": false,
+            "536870912": false,
+            "1073741824": false,
+            "2147483648": false
+          }
+        },
+        "child": {
+          "CANNOT_UNWRAP": false,
+          "CANNOT_BURN_FUSES": false,
+          "CANNOT_TRANSFER": false,
+          "CANNOT_SET_RESOLVER": false,
+          "CANNOT_SET_TTL": false,
+          "CANNOT_CREATE_SUBDOMAIN": false,
+          "CANNOT_APPROVE": false,
+          "CAN_DO_EVERYTHING": true,
+          "unnamed": {
+            "128": false,
+            "256": false,
+            "512": false,
+            "1024": false,
+            "2048": false,
+            "4096": false,
+            "8192": false,
+            "16384": false,
+            "32768": false
+          }
         }
       }
+    },
+    {
+      "trait_type": "Namewrapper Expiry Date",
+      "display_type": "date",
+      "value": 1850443050000
+    },
+    {
+      "trait_type": "Namewrapper State",
+      "display_type": "string",
+      "value": "Emancipated"
     }
-  }, {
-    "trait_type": "Namewrapper Expiry Date",
-    "display_type": "date",
-    "value": 1721492520000
-  }, {
-    "trait_type": "Namewrapper State",
-    "display_type": "string",
-    "value": "Emancipated"
-  }],
-  "url": "https://metadata.fildomains.com/name/fildomains.fil",
-  "last_request_date": 1684468213350,
+  ],
+  "url": "https://app.fildomains.com/avatar.fil",
+  "last_request_date": 1685067505808,
   "version": 2,
-  "background_image": "https://metadata.fildomains.com/filecoin/avatar/fildomains.fil",
-  "image": "https://metadata.fildomains.com/filecoin/0x46b7a579eDa54bdF1D2739F439C21EE889633020/0x1a94080dac56ea3822410a402a581995ec77813c8b74c0668faba55efd5452aa/image",
-  "image_url": "https://metadata.fildomains.com/filecoin/0x46b7a579eDa54bdF1D2739F439C21EE889633020/0x1a94080dac56ea3822410a402a581995ec77813c8b74c0668faba55efd5452aa/image"
+  "background_image": "https://metadata.fildomains.com/filecoin/avatar/avatar.fil",
+  "image": "https://metadata.fildomains.com/filecoin/0x46b7a579eDa54bdF1D2739F439C21EE889633020/0x6e0d3b4e9c9fce6a263ec0e71ebe2bb47154eb3257b6a9445bb0405aab0e46fa/image",
+  "image_url": "https://metadata.fildomains.com/filecoin/0x46b7a579eDa54bdF1D2739F439C21EE889633020/0x6e0d3b4e9c9fce6a263ec0e71ebe2bb47154eb3257b6a9445bb0405aab0e46fa/image"
 }
 
 ```

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { rasterize } from '../service/rasterize';
 
 /* istanbul ignore next */
-export async function ensRasterize(req: Request, res: Response) {
+export async function fnsRasterize(req: Request, res: Response) {
   // #swagger.description = 'FNS NFT image rasterization'
   // #swagger.parameters['networkName'] = { schema: { $ref: '#/definitions/networkName' } }
   // #swagger.parameters['{}'] = { name: 'contractAddress', description: 'Contract address which stores the NFT indicated by the tokenId', schema: { $ref: '#/definitions/contractAddress' } }

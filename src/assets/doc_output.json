@@ -4,7 +4,7 @@
     "version": "0.0.1-alpha.1",
     "title": "FNS Metadata Service",
     "description": "Set of endpoints to query FNS metadata and more",
-    "contact": "contact@ens.domains",
+    "contact": "amncjf@gmail.com",
     "license": "MIT License",
     "x-logo": {
       "url": "/assets/logo.svg",
@@ -50,12 +50,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ENSMetadata"
+                  "$ref": "#/components/schemas/fnsMetadata"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ENSMetadata"
+                  "$ref": "#/components/schemas/fnsMetadata"
                 }
               }
             }
@@ -337,7 +337,7 @@
           "image": "https://ipfs.io/ipfs/QmRagxjj2No4T8gNCjpM42mLZGQE3ZwMYdTFUYe6e6LMBG"
         }
       },
-      "ENSMetadata": {
+      "fnsMetadata": {
         "value": {
           "$name": "nick.fil",
           "$description": "nick.fil, an FNS name.",
@@ -364,7 +364,7 @@
             }
           ],
           "name_length": 4,
-          "url": "https://metadata.fildomains.com:8080/name/nick.fil",
+          "url": "https://app.fildomains.com/fildomains.fil",
           "version": 0,
           "background_image": "https://metadata.ens.domains/mainnet/avatar/nick.fil",
           "image_url": "https://metadata.ens.domains/mainnet/0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85/0x5d5727cb0fb76e4944eafb88ec9a3cf0b3c9025a4b2f947729137c5d7f84f68f/image"
@@ -452,7 +452,7 @@
           "name": "AvatarMetadata"
         }
       },
-      "ENSMetadata": {
+      "fnsMetadata": {
         "type": "object",
         "properties": {
           "name": {
@@ -469,7 +469,7 @@
           },
           "name_length": {
             "type": "string",
-            "example": "Character length of ens name"
+            "example": "Character length of fns name"
           },
           "url": {
             "type": "string",
@@ -499,7 +499,7 @@
           "image_url"
         ],
         "xml": {
-          "name": "ENSMetadata"
+          "name": "fnsMetadata"
         }
       },
       "contractAddress": {
@@ -527,10 +527,9 @@
         "description": "Name of the chain to query for.",
         "type": "string",
         "enum": [
-          "mainnet",
-          "rinkeby",
-          "ropsten",
-          "goerli"
+          "filecoin",
+          "hyperspace",
+          "calibration"
         ],
         "xml": {
           "name": "networkName"

@@ -130,7 +130,7 @@ export class AvatarMetadata {
       if (metadata.image_url) {
         metadata.image = metadata.image_url;
       } else if (metadata.image_data) {
-        metadata.image = `https://metadata.ens.domains/${networkName}/avatar/${this.uri}`;
+        metadata.image = `https://metadata.fildomains.com/${networkName}/avatar/${this.uri}`;
       } else {
         throw new TextRecordNotFound(
           'There is no avatar set under given address',

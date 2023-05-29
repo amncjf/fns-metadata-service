@@ -12,11 +12,7 @@ import { getDomain }               from '../service/domain';
 import getNetwork, { NetworkName } from '../service/network';
 
 /* istanbul ignore next */
-export async function ensImage(req: Request, res: Response) {
-  // #swagger.description = 'FNS NFT image'
-  // #swagger.parameters['networkName'] = { schema: { $ref: '#/definitions/networkName' } }
-  // #swagger.parameters['{}'] = { name: 'contractAddress', description: 'Contract address which stores the NFT indicated by the tokenId', type: 'string', schema: { $ref: '#/definitions/contractAddress' } }
-  // #swagger.parameters['tokenId'] = { type: 'string', description: 'Labelhash(v1) /Namehash(v2) of your FNS name.\n\nMore: https://docs.ens.domains/contract-api-reference/name-processing#hashing-names', schema: { $ref: '#/definitions/tokenId' } }
+export async function fnsImage(req: Request, res: Response) {
   res.setTimeout(RESPONSE_TIMEOUT, () => {
     res.status(504).json({ message: 'Timeout' });
   });
@@ -53,15 +49,15 @@ export async function ensImage(req: Request, res: Response) {
     } else {
       throw Error('Image URL is missing.');
     }
-    /* #swagger.responses[200] = { 
+    /* #swagger.responses[200] = {
         description: 'Image file'
     } */
   } catch (error: any) {
     const errCode = (error?.code && Number(error.code)) || 500;
 
     if (error instanceof FetchError) {
-      /* #swagger.responses[404] = { 
-           description: 'No results found' 
+      /* #swagger.responses[404] = {
+           description: 'No results found'
       } */
       res.status(404).json({
         message: error.message,
@@ -69,11 +65,11 @@ export async function ensImage(req: Request, res: Response) {
       return;
     }
 
-    /* #swagger.responses[500] = { 
+    /* #swagger.responses[500] = {
              description: 'Internal Server Error'
     } */
-    /* #swagger.responses[501] = { 
-           description: 'Unsupported network' 
+    /* #swagger.responses[501] = {
+           description: 'Unsupported network'
     } */
     if (
       error instanceof ContractMismatchError ||
@@ -87,8 +83,8 @@ export async function ensImage(req: Request, res: Response) {
       return;
     }
 
-    /* #swagger.responses[404] = { 
-           description: 'No results found' 
+    /* #swagger.responses[404] = {
+           description: 'No results found'
     } */
     if (!res.headersSent) {
       res.status(404).json({

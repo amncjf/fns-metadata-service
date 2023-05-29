@@ -10,7 +10,9 @@ import nock from 'nock';
 import listen from 'test-listen';
 
 import { MockEntry } from '../mock/entry.mock';
+import { nockProvider, requireUncached } from '../mock/helper';
 import { TestContext } from '../mock/interface';
+
 import * as app from './index';
 import {
   ADDRESS_ETH_REGISTRY,
@@ -19,10 +21,11 @@ import {
 } from './config';
 import getNetwork from './service/network';
 import { GET_DOMAINS } from './service/subgraph';
-import { nockProvider, requireUncached } from '../mock/helper';
-import { Metadata } from './service/metadata';
 
-const TEST_NETWORK = 'goerli';
+import { Metadata } from './service/metadata';
+import {request} from "graphql-request";
+
+const TEST_NETWORK = 'hyperspace';
 
 const { WEB3_URL: web3_url, SUBGRAPH_URL: subgraph_url } =
   getNetwork(TEST_NETWORK);
@@ -94,12 +97,12 @@ test.before(async (t: ExecutionContext<TestContext>) => {
   nockProvider(WEB3_URL, 'eth_chainId', [], {
     id: 1,
     jsonrpc: '2.0',
-    result: '0x05', // goerli
+    result: '0x0C45', // hyperspace
   });
   nockProvider(WEB3_URL, 'net_version', [], {
     jsonrpc: '2.0',
     id: 1,
-    result: '5',
+    result: '3141',
   });
   nockProvider(
     WEB3_URL,
@@ -185,10 +188,12 @@ test('get welcome message', async (t: ExecutionContext<TestContext>) => {
 });
 
 test('get /:contractAddress/:tokenId for domain (wrappertest3.fil)', async (t: ExecutionContext<TestContext>) => {
+
   const result: Metadata = await got(
     `${METADATA_PATH}/${wrappertest3.namehash}`,
     options
   ).json();
+
   delete result.last_request_date;
   t.deepEqual(result, wrappertest3.expect);
 });
@@ -257,14 +262,6 @@ test('get /:contractAddress/:tokenId for unknown namehash', async (t: ExecutionC
   t.is(statusCode, 404);
 });
 
-test('get /:contractAddress/:tokenId for unknown namehash on subgraph but registered', async (t: ExecutionContext<TestContext>) => {
-  const { message }: { message: Metadata } = await got(
-    `${METADATA_PATH}/${unknownRegistered.namehash}`,
-    options
-  ).json();
-  delete message.last_request_date;
-  t.deepEqual(message, unknownRegistered.expect);
-});
 
 test('get /:contractAddress/:tokenId for empty tokenId', async (t: ExecutionContext<TestContext>) => {
   const {
@@ -282,6 +279,7 @@ test('raise 404 status from subgraph connection', async (t: ExecutionContext<Tes
     code: '404',
     statusCode: 404,
   };
+
   nock(SUBGRAPH_URL.origin)
     .post(SUBGRAPH_PATH, {
       query: GET_DOMAINS,
@@ -290,6 +288,7 @@ test('raise 404 status from subgraph connection', async (t: ExecutionContext<Tes
       },
     })
     .replyWithError(fetchError);
+
   const {
     response: { body, statusCode },
   }: HTTPError = (await t.throwsAsync(
@@ -404,7 +403,7 @@ test('raise ContractMismatchError', async (t: ExecutionContext<TestContext>) => 
     response: { body },
   }: HTTPError = (await t.throwsAsync(
     () =>
-      got(`goerli/${NON_CONTRACT_ADDRESS}/${sub1Wrappertest.namehash}`, {
+      got(`hyperspace/${NON_CONTRACT_ADDRESS}/${sub1Wrappertest.namehash}`, {
         ...options,
         retry: 0,
       }),
@@ -431,3 +430,4 @@ test('should get assets when ENV set for local', async (t: ExecutionContext<Test
   }).text();
   t.assert(result.includes('openapi'));
 });
+

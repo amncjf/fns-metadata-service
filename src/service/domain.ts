@@ -15,9 +15,9 @@ import {
   Version,
 }                         from '../base';
 import { NetworkName }    from './network';
-import { 
-  decodeFuses, 
-  getWrapperState 
+import {
+  decodeFuses,
+  getWrapperState
 }                         from '../utils/fuse';
 import { getNamehash }    from '../utils/namehash';
 
@@ -47,8 +47,8 @@ export async function getDomain(
   }
   const queryDocument: string =
     version !== Version.v2 ? GET_DOMAINS_BY_LABELHASH : GET_DOMAINS;
-  const result = await request(SUBGRAPH_URL, queryDocument, { tokenId: hexId });
 
+  const result = await request(SUBGRAPH_URL, queryDocument, { tokenId: hexId });
   const domain = version !== Version.v2 ? result.domains[0] : result.domain;
   if (!(domain && Object.keys(domain).length))
     throw new SubgraphRecordNotFound(`No record for ${hexId}`);

@@ -20,11 +20,7 @@ import { Metadata }                from '../service/metadata';
 import getNetwork, { NetworkName } from '../service/network';
 import { constructEthNameHash }    from '../utils/namehash';
 
-export async function ensMetadata(req: Request, res: Response) {
-  // #swagger.description = 'FNS NFT metadata'
-  // #swagger.parameters['networkName'] = { schema: { $ref: '#/definitions/networkName' } }
-  // #swagger.parameters['{}'] = { name: 'contractAddress', description: 'Contract address which stores the NFT indicated by the tokenId', schema: { $ref: '#/definitions/contractAddress' } }
-  // #swagger.parameters['tokenId'] = { type: 'string', description: 'Labelhash(v1) /Namehash(v2) of your FNS name.\n\nMore: https://docs.ens.domains/contract-api-reference/name-processing#hashing-names', schema: { $ref: '#/definitions/tokenId' } }
+export async function fnsMetadata(req: Request, res: Response) {
   res.setTimeout(RESPONSE_TIMEOUT, () => {
     res.status(504).json({ message: 'Timeout' });
   });
@@ -51,19 +47,19 @@ export async function ensMetadata(req: Request, res: Response) {
 
     // add timestamp of the request date
     result.last_request_date = last_request_date;
-    /* #swagger.responses[200] = { 
+    /* #swagger.responses[200] = {
       description: 'Metadata object',
-      schema: { $ref: '#/definitions/ENSMetadata' }
+      schema: { $ref: '#/definitions/fnsMetadata' }
     } */
     res.json(result);
     return;
   } catch (error: any) {
     const errCode = (error?.code && Number(error.code)) || 500;
-    /* #swagger.responses[500] = { 
+    /* #swagger.responses[500] = {
              description: 'Internal Server Error'
     } */
-    /* #swagger.responses[501] = { 
-           description: 'Unsupported network' 
+    /* #swagger.responses[501] = {
+           description: 'Unsupported network'
     } */
     if (
       error instanceof FetchError ||

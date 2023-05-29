@@ -10,7 +10,12 @@ import getNetwork from './network';
 import { GET_DOMAINS_BY_LABELHASH, GET_REGISTRATIONS } from './subgraph';
 
 const test = avaTest as TestFn<TestContext>;
-const NETWORK = 'mainnet';
+const NETWORK = 'hyperspace';
+const NETWORKISH = {
+  name: 'hyperspace',
+  chainId: 3141,
+  ensAddress: '0x0000000000Ec577Ad90e99CA7817e976e953C3bd',
+}
 
 const { WEB3_URL: web3_url, SUBGRAPH_URL: subgraph_url } = getNetwork(NETWORK);
 const WEB3_URL = new URL(web3_url);
@@ -101,22 +106,21 @@ test.before(async (t: ExecutionContext<TestContext>) => {
     })
     .reply(200, {
       data: {
-        domains: [
+        "domains": [
           {
-            id: '0xee6c4522aab0003e8d14cd40a6af439055fd2577951148c14b6cea9a53475835',
-            labelhash:
-              '0xaf2caa1c2ca1d027f1ac823b529d0a67cd144264b2789fa2ea4d63a67c7103cc',
-            name: 'vitalik.fil',
-            createdAt: '1497775154',
-            parent: {
-              id: '0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae',
+            "id": "0x90af55c1932e9328258e25e750466a7f47bbb687b6ed9cb205fcabbb4efa52dd",
+            "labelhash": "0xaf2caa1c2ca1d027f1ac823b529d0a67cd144264b2789fa2ea4d63a67c7103cc",
+            "name": "vitalik.fil",
+            "createdAt": "1685086650",
+            "parent": {
+              "id": "0x78f6b1389af563cc5c91f234ea46b055e49658d8b999eeb9e0baef7dbbc93fdb"
             },
-            resolver: {
-              texts: ['url', 'avatar'],
-              address: '0x4976fb03c32e5b8cfe2b6ccb31c09ba78ebaba41',
-            },
-          },
-        ],
+            "resolver": {
+              "texts": null,
+              "address": "0xd75719e7ca2dddd663911f7d667bf0f1ac54bf1e"
+            }
+          }
+        ]
       },
     });
 
@@ -149,7 +153,7 @@ test.after.always((t: ExecutionContext<TestContext>) => {
 test('should raise an error if namehash of the name is not match with subgraph', async (t: ExecutionContext<TestContext>) => {
   const provider = new ethers.providers.StaticJsonRpcProvider(
     WEB3_URL.origin,
-    NETWORK
+    NETWORKISH
   );
 
   const error: NamehashMismatchError = (await t.throwsAsync(
@@ -175,7 +179,7 @@ test('should raise an error if namehash of the name is not match with subgraph',
 test('should return successfully if namehash is matches with subgraph', async (t: ExecutionContext<TestContext>) => {
   const provider = new ethers.providers.StaticJsonRpcProvider(
     WEB3_URL.origin,
-    NETWORK
+    NETWORKISH
   );
 
   const domain = await getDomain(
@@ -183,9 +187,10 @@ test('should return successfully if namehash is matches with subgraph', async (t
     NETWORK,
     subgraph_url,
     ADDRESS_ETH_REGISTRAR,
-    '79233663829379634837589865448569342784712482819484549289560981379859480642508',
+    '0xaf2caa1c2ca1d027f1ac823b529d0a67cd144264b2789fa2ea4d63a67c7103cc',
     Version.v1,
     false
   );
+
   t.is(domain.name, 'vitalik.fil');
 });

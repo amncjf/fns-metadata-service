@@ -6,6 +6,7 @@ import {
   NODE_PROVIDER_URL_CF,
   NODE_PROVIDER_URL_GOERLI,
 } from '../config';
+import {Networkish} from "@ethersproject/networks";
 
 const NODE_PROVIDERS = {
   INFURA    : 'INFURA',
@@ -16,10 +17,6 @@ const NODE_PROVIDERS = {
 
 export const NETWORK = {
   LOCAL  : 'local',
-  RINKEBY: 'rinkeby',
-  ROPSTEN: 'ropsten',
-  GOERLI : 'goerli',
-  MAINNET: 'mainnet',
   FILECOIN: 'filecoin',
   HYPERSPACE: 'hyperspace',
   CALIBRATION: 'calibration',
@@ -40,20 +37,7 @@ function getWeb3URL(
     return 'https://api.calibration.node.glif.io/rpc/v1'
   }
 
-  switch (providerName.toUpperCase()) {
-    case NODE_PROVIDERS.INFURA:
-      return `${api.replace('https://', `https://${network}.`)}`;
-    case NODE_PROVIDERS.CLOUDFLARE:
-      return `${api}/${network}`;
-    case NODE_PROVIDERS.GOOGLE:
-      if (network === NETWORK.MAINNET) return api;
-      if (network === NETWORK.GOERLI) return NODE_PROVIDER_URL_GOERLI;
-      return `${NODE_PROVIDER_URL_CF}/${network}`;
-    case NODE_PROVIDERS.GETH:
-      return api;
-    default:
-      throw Error('');
-  }
+  throw Error('');
 }
 
 export default function getNetwork(network: NetworkName): {
@@ -64,32 +48,37 @@ export default function getNetwork(network: NetworkName): {
   // currently subgraphs used under this function are outdated,
   // we will have namewrapper support and more attributes when latest subgraph goes to production
   let SUBGRAPH_URL: string;
+  let networkish: Networkish | undefined = undefined;
   switch (network) {
     case NETWORK.LOCAL:
-      SUBGRAPH_URL = 'http://127.0.0.1:8000/subgraphs/name/graphprotocol/ens';
+      SUBGRAPH_URL = 'http://localhost:5678/${network}';
       break;
     case NETWORK.FILECOIN:
       SUBGRAPH_URL =
         'https://api.fildomains.com:5678/filecoin';
+      networkish = {
+        name: network,
+        chainId: 314,
+        ensAddress: '0x0000000000Ec577Ad90e99CA7817e976e953C3bd',
+      }
       break;
     case NETWORK.HYPERSPACE:
       SUBGRAPH_URL =
           'https://api.fildomains.com:5678/hyperspace';
+      networkish = {
+        name: network,
+        chainId: 3141,
+        ensAddress: '0x0000000000Ec577Ad90e99CA7817e976e953C3bd',
+      }
       break;
     case NETWORK.CALIBRATION:
       SUBGRAPH_URL =
           'https://api.fildomains.com:5678/calibration';
-      break;
-    case NETWORK.ROPSTEN:
-      SUBGRAPH_URL =
-        'https://api.thegraph.com/subgraphs/name/ensdomains/ensropsten';
-      break;
-    case NETWORK.GOERLI:
-      SUBGRAPH_URL =
-        'https://api.thegraph.com/subgraphs/name/ensdomains/ensgoerli';
-      break;
-    case NETWORK.MAINNET:
-      SUBGRAPH_URL = 'https://api.thegraph.com/subgraphs/name/ensdomains/ens';
+      networkish = {
+        name: network,
+        chainId: 314159,
+        ensAddress: '0x0000000000Ec577Ad90e99CA7817e976e953C3bd',
+      }
       break;
     default:
       throw new UnsupportedNetwork(`Unknown network '${network}'`, 501);
@@ -98,8 +87,7 @@ export default function getNetwork(network: NetworkName): {
   const WEB3_URL = getWeb3URL(NODE_PROVIDER, NODE_PROVIDER_URL, network);
 
   // add source param at the end for better request measurability
-  SUBGRAPH_URL = SUBGRAPH_URL + '?source=ens-metadata';
-
-  const provider = new ethers.providers.StaticJsonRpcProvider(WEB3_URL);
+  SUBGRAPH_URL = SUBGRAPH_URL + '?source=fns-metadata';
+  const provider = new ethers.providers.StaticJsonRpcProvider(WEB3_URL, networkish);
   return { WEB3_URL, SUBGRAPH_URL, provider };
 }

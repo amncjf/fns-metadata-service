@@ -64,7 +64,7 @@ export class Metadata {
     this.name = this.formatName(name, tokenId);
     this.description = this.formatDescription(name, description);
     this.attributes = this.initializeAttributes(created_date, label);
-    this.url = this.is_normalized ? `https://metadata.fildomains.com/name/${name}` : null;
+    this.url = this.is_normalized ? `https://app.fildomains.com/${name}` : null;
     this.last_request_date = last_request_date;
     this.version = version;
   }
@@ -165,7 +165,7 @@ export class Metadata {
   processSubdomain(name: string, isSubdomain: boolean) {
     let subdomainText;
     let domain = name;
-    
+
     if (isSubdomain && !name.includes('...')) {
       const labels = name.split('.');
       let subdomain = labels.slice(0, labels.length - 2).join('.') + '.';

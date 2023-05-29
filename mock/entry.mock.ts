@@ -10,16 +10,15 @@ import {
   GET_DOMAINS,
   GET_REGISTRATIONS,
   GET_WRAPPED_DOMAIN,
-}                               from '../src/service/subgraph';
+} from '../src/service/subgraph';
 import {
   DomainResponse,
   MockEntryBody,
   RegistrationResponse,
   WrappedDomainResponse,
-}                               from './interface';
+} from './interface';
 
-
-const { SUBGRAPH_URL: subgraph_url } = getNetwork('goerli');
+const { SUBGRAPH_URL: subgraph_url } = getNetwork('hyperspace');
 const SUBGRAPH_URL = new URL(subgraph_url);
 const SUBGRAPH_PATH = SUBGRAPH_URL.pathname + SUBGRAPH_URL.search;
 
@@ -35,7 +34,7 @@ export class MockEntry {
     hasImageKey = null,
     image,
     owner = '0x97ba55f61345665cf08c4233b9d6e61051a43b18',
-    parent = '0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae',
+    parent = '0x78f6b1389af563cc5c91f234ea46b055e49658d8b999eeb9e0baef7dbbc93fdb',
     resolver = null,
     registration = false,
     statusCode = 200,
@@ -102,10 +101,10 @@ export class MockEntry {
     });
 
     (_metadata as Metadata).setImage(
-      `https://metadata.ens.domains/goerli/${ADDRESS_NAME_WRAPPER}/${this.namehash}/image`
+      `https://metadata.fildomains.com/hyperspace/${ADDRESS_NAME_WRAPPER}/${this.namehash}/image`
     );
     (_metadata as Metadata).setBackground(
-      `https://metadata.ens.domains/goerli/avatar/${name}`
+      `https://metadata.fildomains.com/hyperspace/avatar/${name}`
     );
 
     this.domainResponse = {

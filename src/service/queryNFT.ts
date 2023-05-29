@@ -3,10 +3,9 @@ import getNetwork, { NetworkName }            from '../service/network';
 import { UnsupportedNetwork }                 from '../base';
 
 const networks: { [key: string]: string } = {
-  '1': 'mainnet',
-  '3': 'ropsten',
-  '4': 'rinkeby',
-  '5': 'goerli',
+  '314': 'filecoin',
+  '3141': 'hyperspace',
+  '314159': 'calibration',
 };
 
 export async function queryNFT(uri: string) {
